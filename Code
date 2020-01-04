@@ -1,0 +1,51 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int randNum;
+bool gameOver = false;
+int input;
+int numOfTries = 0;
+
+
+int userInput()
+{
+    cout << "Enter a number between 1-100: ";
+    cin >> input;
+    numOfTries++;
+    return input;
+}
+
+void logic()
+{
+    if (input > randNum)
+    {
+        cout << "Your number was too big. ";
+    }
+    else if(input < randNum)
+    {
+        cout << "Your number was too small. ";
+    }
+    else
+    {
+        cout << "Congratulations, " << input << " was correct! You took " << numOfTries << " tries to get it.";
+    }
+
+    if (numOfTries == 7 && input != randNum)
+    {
+        cout << "Sorry. You tried 7 times but still failed.";
+    }
+}
+
+int main()
+{
+    srand(static_cast <unsigned int> (time(0)));
+    randNum = (rand() % 100) + 1;
+
+    while (input != randNum && numOfTries < 7)
+    {
+        userInput();
+        logic();
+    }
+}
